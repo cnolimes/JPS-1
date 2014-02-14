@@ -1,0 +1,27 @@
+function rogue(self)
+	local cp = GetComboPoints("player","target")
+	local hfb = UnitBuff("player","Hunger for Blood")
+	local snd = UnitBuff("player","Slice and Dice")
+	local energy = UnitMana("player")
+	local bleeding = UnitBuff("target","Garrote") or UnitBuff("target","Rend") or UnitBuff("target","Rake") or UnitBuff("target","Rip") or UnitBuff("target","Rupture")
+	local spell = nil
+	
+	if jps.buff("player","stealth") and not hfb then
+		spell = "Garrote"
+	elseif jps.should_kick("target") then
+		spell = "Kick"
+	elseif not jps.buff("player","overkill") then
+		spell = "Vanish"
+	elseif IsUsableSpell("Hunger for Blood") and not hfb then
+		spell = "Hunger for Blood"
+	elseif cp > 0 and not snd then
+		spell = "Slice and Dice"
+	elseif jps.buff_duration("player","slice and dice") < 3 then
+		spell = "Envenom"
+	elseif cp > 3 and energy >= 70 then
+		spell = "Envenom"
+	elseif cp < 4 and energy > 80 then
+		spell = "Mutilate"
+	end
+  return spell
+end
