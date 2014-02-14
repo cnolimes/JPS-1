@@ -103,6 +103,10 @@ function combatEventHandler(self, event, ...)
 end
 
 function jps.lolfindspec()
+	--Do you know Holy Light, Rank 1? Then you're a nub pally.
+	if IsSpellKnown(635) == true then return 106
+	end
+	--Do you know Mutilate? Then you're an Assassination Rogue.
 	if IsSpellKnown(1329) == true then return 22
 	end
 end
@@ -200,7 +204,7 @@ function combat(self)
 		["Druid"] = { ["Feral"] = druid_feral, ["Balance"] = druid_balance, ["Restoration"] = druid_resto },
 		["Death Knight"] = { ["Blood"] = dk_blood },
 		["Shaman"] = { ["Enhancement"] = shaman_enhancement, ["Elemental"] = shaman_elemental },
-		["Paladin"] = { ["Protection"] = paladin_protadin, ["Retribution"] = paladin_ret },
+		["Paladin"] = { ["Protection"] = paladin_protadin, ["Retribution"] = paladin_ret, ["NubPally"] = paladin_nub },
 		["Warlock"] = { ["Destruction"] = warlock_destro, ["Demonology"] = warlock_demo, ["Affliction"] = warlock_affliction},
 		["Hunter"] = { ["Marksmanship"] = hunter_mm, ["Beast Mastery"] = hunter_bm },
 		["Mage"] = { ["Fire"] = mage_fire, ["Arcane"] = mage_arcane },

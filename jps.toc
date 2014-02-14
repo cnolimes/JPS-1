@@ -27,4 +27,4 @@ Rotations\warrior_prot.lua
 Rotations\hunter_bm.lua
 Rotations\hunter_mm.lua
 Rotations\rogue_assassination.lua
-
+Rotations\paladin_nub.lua
