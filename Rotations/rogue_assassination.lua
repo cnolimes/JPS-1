@@ -12,18 +12,23 @@ function rogue_assassination(self)
 		spell = "Garrote"
 	elseif jps.should_kick("target") then
 		spell = "Kick"
-	elseif not overkill then
-		spell = "Vanish"
+	--elseif not overkill then
+		--spell = "Vanish"
 	elseif IsUsableSpell("Hunger for Blood") and not hfb then
 		spell = "Hunger for Blood"
 	elseif cp > 0 and not snd then
 		spell = "Slice and Dice"
-	elseif jps.buff_duration("player","slice and dice") < 3 then
+	elseif jps.buff_duration("player","slice and dice") < 3 and cp > 0 then
 		spell = "Envenom"
-	elseif cp > 3 and energy >= 70 then
+	elseif cp > 3 then
 		spell = "Envenom"
-	elseif cp < 4 and energy > 80 then
+	elseif cp < 4 then
 		spell = "Mutilate"
+	else RunMacroText("/startattack")
 	end
   return spell
+end
+
+function rogue_assassination_ooc(self)
+
 end
