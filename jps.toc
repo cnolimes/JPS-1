@@ -15,7 +15,7 @@ Rotations\druid_resto.lua
 Rotations\dk_blood.lua
 Rotations\shaman_enhancement.lua
 Rotations\shaman_elemental.lua
-Rotations\paladin_protadin.lua
+Rotations\paladin_protection.lua
 Rotations\paladin_ret.lua
 Rotations\mage_fire.lua
 Rotations\mage_arcane.lua
@@ -28,3 +28,5 @@ Rotations\hunter_bm.lua
 Rotations\hunter_mm.lua
 Rotations\rogue_assassination.lua
 Rotations\paladin_nub.lua
+Rotations\paladin_ret_ooc.lua
+Rotations\paladin_holy.lua

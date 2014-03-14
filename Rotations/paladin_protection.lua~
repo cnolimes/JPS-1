@@ -1,0 +1,27 @@
+function paladin_protection(self)
+	-- Complete re-write for 4.2 by GoCarGo.
+        local myHealthPercent = UnitHealth("player")/UnitHealthMax("player") * 100
+        local targetHealthPercent = UnitHealth("target")/UnitHealthMax("target") * 100
+        local myManaPercent = UnitMana("player")/UnitManaMax("player") * 100
+        local health = UnitHealth("target")/UnitHealthMax("target")
+        
+        if not ub("player","Righteous Fury") then
+        	spell = "Righteous Fury"
+        elseif not ub("player","Holy Shield") == 0 then
+        	spell = "Holy Shield"
+        elseif cd("Hammer of the Righteous") == 0 then
+        	spell = "Hammer of the Righteous"
+        elseif cd("Judgement of Wisdom") == 0 then
+        	spell = "Judgement of Wisdom"
+        elseif cd("Shielf of Righteousness") == 0 then
+        	spell = "Shield of Righteousness"
+        elseif health < .2 and cd("hammer of wrath") == 0 then
+		spell = "hammer of wrath"
+        elseif not ub("player","Sacred Shield") then
+        	spell = "Sacred Shield"
+        else RunMacroText("/startattack")
+	-- Return
+	return spell
+	end
+
+end

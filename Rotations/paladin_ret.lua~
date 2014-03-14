@@ -6,7 +6,7 @@ function paladin_ret(self)
 	
 	if IsShiftKeyDown() ~=  nil and cd("Consecration") == 0 then
 		spell = "Consecration"
-	elseif IsAltKeyDown() ~= nil and mymana >= .25 then
+	if IsAltKeyDown() ~= nil and mymana >= .25 then
 		spell = "Flash of light"
 	elseif cd("judgement of wisdom") == 0 then 
 		spell = "judgement of wisdom"
@@ -27,8 +27,9 @@ function paladin_ret(self)
 	elseif ub("player","The Art of War") and UnitExists("focus") and UnitIsFriend("player","focus") == 1 and focushealth <= .5 and mymana <= .5 then
 		RunMacroText("/cast [target=focus] Flash of Light")
 	else RunMacroText("/startattack")
+	end
 
  return spell
- end
+end
 end
 

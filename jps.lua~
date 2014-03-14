@@ -1,6 +1,6 @@
 -- Universal
 jps = {}
-jps.Version = "0.9.1"
+jps.Version = "0.0.1"
 jps.RaidStatus = {}
 jps.UpdateInterval = 0.1
 jps.Enabled = false
@@ -22,6 +22,7 @@ jps.Error = nil
 jps.Lag = nil
 jps.Moving = nil
 jps.IconSpell = nil
+jps.PvP = false
 -- Class Specific
 jps.Havoc = false
 jps.Opening = true
@@ -95,6 +96,8 @@ function combatEventHandler(self, event, ...)
 		jps.Error = ...
 		if jps.Error == "You must be behind your target." and jps.ThisCast == "shred" then
 			jps.Cast("mangle(cat form)")
+		elseif jps.Error == "You must be behind your target." and jps.ThisCast == "garrote" and jps.spec(22) then
+			jps.Cast("mutilate")
 		end
 	-- RaidStatus Update
 	elseif event == "UNIT_HEALTH" and jps.Enabled then
@@ -109,6 +112,13 @@ function jps.lolfindspec()
 	
 	--Do you know Crusader Strike? Then you're a Ret Pally.
 	if IsSpellKnown(35395) == true then return 18 end
+	
+	--Do you know Holy Shock? Then you're a Holy Pally.
+	if IsSpellKnown(48825) == true then return 16 end
+	
+	--Do you know Avenger's Shield? Then you're a Prot Pally.
+	if IsSpellKnown(31935) == true then return 17 end
+	
 	
 	--Do you know Holy Light, Rank 1? 
 	--Do you not have enough talents to really be defined in a spec? 
@@ -174,6 +184,10 @@ function SlashCmdList.jps(msg, editbox)
 	elseif msg == "opening" then
 		jps.Opening = not jps.Opening
 		print("Opening flag is now set to",jps.Opening)
+	elseif msg == "pvpe" then
+		jps.PvP = true
+	elseif msg == "pvpd" then
+		jps.PvP = false
 	elseif msg == "help" then
 		print("Slash Commands:")
 		print("/jps - Show enabled status.")
@@ -185,6 +199,8 @@ function SlashCmdList.jps(msg, editbox)
 		print("/jps cds - Toggle use of cooldowns.")
 		print("/jps pew - Spammable macro to do your best moves, if for some reason you don't want it fully automated")
 		print("/jps interrupts - Toggle interrupting")
+		print("/jps pvpe - Enable PvP behaviors")
+		print("/jps pvpd - Disable PvP behaviors")
 		print("/jps ooce - Enable the out of combat behaviors")
 		print("/jps oocd - Disable the out of combat behaviors")
 		print("/jps help - Show this help text.")
@@ -225,7 +241,7 @@ function combat(self)
 		["Druid"] = { ["Feral"] = druid_feral, ["Balance"] = druid_balance, ["Restoration"] = druid_resto },
 		["Death Knight"] = { ["Blood"] = dk_blood },
 		["Shaman"] = { ["Enhancement"] = shaman_enhancement, ["Elemental"] = shaman_elemental },
-		["Paladin"] = { ["Protection"] = paladin_protadin, ["Retribution"] = paladin_ret, ["NubPally"] = paladin_nub },
+		["Paladin"] = { ["Protection"] = paladin_protection, ["Retribution"] = paladin_ret, ["NubPally"] = paladin_nub, ["Holy"] = paladin_holy },
 		["Warlock"] = { ["Destruction"] = warlock_destro, ["Demonology"] = warlock_demo, ["Affliction"] = warlock_affliction},
 		["Hunter"] = { ["Marksmanship"] = hunter_mm, ["Beast Mastery"] = hunter_bm },
 		["Mage"] = { ["Fire"] = mage_fire, ["Arcane"] = mage_arcane },
@@ -262,7 +278,7 @@ function outofcombat(self)
 		["Druid"] = { ["Feral"] = druid_feral, ["Balance"] = druid_balance, ["Restoration"] = druid_resto },
 		["Death Knight"] = { ["Blood"] = dk_blood },
 		["Shaman"] = { ["Enhancement"] = shaman_enhancement, ["Elemental"] = shaman_elemental },
-		["Paladin"] = { ["Protection"] = paladin_protadin, ["Retribution"] = paladin_ret, ["NubPally"] = paladin_nub },
+		["Paladin"] = { ["Protection"] = paladin_protection, ["Retribution"] = paladin_ret_ooc, ["NubPally"] = paladin_nub },
 		["Warlock"] = { ["Destruction"] = warlock_destro, ["Demonology"] = warlock_demo, ["Affliction"] = warlock_affliction},
 		["Hunter"] = { ["Marksmanship"] = hunter_mm, ["Beast Mastery"] = hunter_bm },
 		["Mage"] = { ["Fire"] = mage_fire, ["Arcane"] = mage_arcane },
@@ -282,7 +298,7 @@ function outofcombat(self)
 	-- Movement
 	jps.Moving = GetUnitSpeed("player") > 0
 	-- Get spell from rotation.
-	jps.ThisCast = jps.Rotations[jps.Class][jps.Spec]"ooc"()
+	jps.ThisCast = jps.Rotations[jps.Class][jps.Spec]()
 	-- Check spell usability.
 	if jps.ThisCast then
 		jps.Cast(jps.ThisCast)

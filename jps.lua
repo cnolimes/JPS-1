@@ -96,7 +96,7 @@ function combatEventHandler(self, event, ...)
 		jps.Error = ...
 		if jps.Error == "You must be behind your target." and jps.ThisCast == "shred" then
 			jps.Cast("mangle(cat form)")
-		elseif jps.Error == "You must be behind your target." and jps.ThisCast == "hemorrhage" then
+		elseif jps.Error == "You must be behind your target." and jps.ThisCast == "garrote" and jps.spec(22) then
 			jps.Cast("mutilate")
 		end
 	-- RaidStatus Update
@@ -113,15 +113,24 @@ function jps.lolfindspec()
 	--Do you know Crusader Strike? Then you're a Ret Pally.
 	if IsSpellKnown(35395) == true then return 18 end
 	
+	--Do you know Holy Shock? Then you're a Holy Pally.
+	if IsSpellKnown(48825) == true then return 16 end
+	
+	--Do you know Avenger's Shield? Then you're a Prot Pally.
+	if IsSpellKnown(31935) == true then return 17 end
+	
 	--Do you know Holy Light, Rank 1? 
 	--Do you not have enough talents to really be defined in a spec? 
 	--Then you're a nub Pally.
 	if IsSpellKnown(635) == true and not (IsSpellKnown(35395)) then return 10 end
 	
-	--Do you know Mutilate? Then you're an Assassination Rogue.
-	if IsSpellKnown(1329) == true then return 22
 	
-	end
+	--Do you know Mutilate? Then you're an Assassination Rogue.
+	if IsSpellKnown(1329) == true then return 22 end
+	
+	
+	--Do you know Heart Strike? Then you're a Blood DK.
+	if IsSpellknown(000001) == true then return 1 end
 end
 	
 
@@ -234,7 +243,7 @@ function combat(self)
 		["Druid"] = { ["Feral"] = druid_feral, ["Balance"] = druid_balance, ["Restoration"] = druid_resto },
 		["Death Knight"] = { ["Blood"] = dk_blood },
 		["Shaman"] = { ["Enhancement"] = shaman_enhancement, ["Elemental"] = shaman_elemental },
-		["Paladin"] = { ["Protection"] = paladin_protadin, ["Retribution"] = paladin_ret, ["NubPally"] = paladin_nub },
+		["Paladin"] = { ["Protection"] = paladin_protection, ["Retribution"] = paladin_ret, ["NubPally"] = paladin_nub, ["Holy"] = paladin_holy },
 		["Warlock"] = { ["Destruction"] = warlock_destro, ["Demonology"] = warlock_demo, ["Affliction"] = warlock_affliction},
 		["Hunter"] = { ["Marksmanship"] = hunter_mm, ["Beast Mastery"] = hunter_bm },
 		["Mage"] = { ["Fire"] = mage_fire, ["Arcane"] = mage_arcane },
@@ -271,7 +280,7 @@ function outofcombat(self)
 		["Druid"] = { ["Feral"] = druid_feral, ["Balance"] = druid_balance, ["Restoration"] = druid_resto },
 		["Death Knight"] = { ["Blood"] = dk_blood },
 		["Shaman"] = { ["Enhancement"] = shaman_enhancement, ["Elemental"] = shaman_elemental },
-		["Paladin"] = { ["Protection"] = paladin_protadin, ["Retribution"] = paladin_ret, ["NubPally"] = paladin_nub },
+		["Paladin"] = { ["Protection"] = paladin_protection, ["Retribution"] = paladin_ret_ooc, ["NubPally"] = paladin_nub },
 		["Warlock"] = { ["Destruction"] = warlock_destro, ["Demonology"] = warlock_demo, ["Affliction"] = warlock_affliction},
 		["Hunter"] = { ["Marksmanship"] = hunter_mm, ["Beast Mastery"] = hunter_bm },
 		["Mage"] = { ["Fire"] = mage_fire, ["Arcane"] = mage_arcane },
@@ -291,7 +300,7 @@ function outofcombat(self)
 	-- Movement
 	jps.Moving = GetUnitSpeed("player") > 0
 	-- Get spell from rotation.
-	jps.ThisCast = jps.Rotations[jps.Class][jps.Spec][ooc]()
+	jps.ThisCast = jps.Rotations[jps.Class][jps.Spec]()
 	-- Check spell usability.
 	if jps.ThisCast then
 		jps.Cast(jps.ThisCast)
