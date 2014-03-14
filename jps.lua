@@ -122,7 +122,7 @@ function jps.lolfindspec()
 	--Do you know Holy Light, Rank 1? 
 	--Do you not have enough talents to really be defined in a spec? 
 	--Then you're a nub Pally.
-	if IsSpellKnown(635) == true and not (IsSpellKnown(35395)) then return 10 end
+	if IsSpellKnown(635) == true and not (IsSpellKnown(35395) == true or IsSpellKnown(48825) == true or IsSpellKnown(31935) == true) then return 10 end
 	
 	
 	--Do you know Mutilate? Then you're an Assassination Rogue.

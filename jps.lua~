@@ -119,16 +119,18 @@ function jps.lolfindspec()
 	--Do you know Avenger's Shield? Then you're a Prot Pally.
 	if IsSpellKnown(31935) == true then return 17 end
 	
-	
 	--Do you know Holy Light, Rank 1? 
 	--Do you not have enough talents to really be defined in a spec? 
 	--Then you're a nub Pally.
 	if IsSpellKnown(635) == true and not (IsSpellKnown(35395)) then return 10 end
 	
-	--Do you know Mutilate? Then you're an Assassination Rogue.
-	if IsSpellKnown(1329) == true then return 22
 	
-	end
+	--Do you know Mutilate? Then you're an Assassination Rogue.
+	if IsSpellKnown(1329) == true then return 22 end
+	
+	
+	--Do you know Heart Strike? Then you're a Blood DK.
+	if IsSpellknown(000001) == true then return 1 end
 end
 	
 
