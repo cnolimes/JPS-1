@@ -1,0 +1,7 @@
+JPS is a rotation bot, this copy is for private servers running 3.3.5a. You will need a LUA unlocker to use this addon. Right now the following classes/specs are supported (PvE only):
+
+Paladin: Retribution, Protection, Holy (in progress)
+Death Knight: Blood
+Rogue: Assassination
+
+Contact me about adding support for other classes and specs.
