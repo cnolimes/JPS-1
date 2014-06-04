@@ -12,6 +12,8 @@ function paladin_protection(self)
 		spell = "avenger's shield"
 	elseif IsAltKeyDown() ~= nil and cd("consecration") == 0 then
 		spell = "consecration"
+	elseif IsControlKeyDown() ~= nil and cd("divine plea") == 0 then
+		spell = "divine plea"
 	elseif cd("Hammer of the Righteous") == 0 then 
 		spell = "Hammer of the Righteous"
 	elseif cd("judgement of wisdom") == 0 then 
