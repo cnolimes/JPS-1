@@ -109,28 +109,31 @@ function combatEventHandler(self, event, ...)
 end
 
 function jps.lolfindspec()
-	
+	--Paladin Specs
 	--Do you know Crusader Strike? Then you're a Ret Pally.
 	if IsSpellKnown(35395) == true then return 18 end
-	
 	--Do you know Holy Shock? Then you're a Holy Pally.
 	if IsSpellKnown(48825) == true then return 16 end
-	
 	--Do you know Avenger's Shield? Then you're a Prot Pally.
 	if IsSpellKnown(31935) == true then return 17 end
-	
 	--Do you know Holy Light, Rank 1? 
 	--Do you not have enough talents to really be defined in a spec? 
 	--Then you're a nub Pally.
 	if IsSpellKnown(635) == true and not (IsSpellKnown(35395) == true or IsSpellKnown(48825) == true or IsSpellKnown(31935) == true) then return 10 end
-	
-	
+	----
+	----
+	--Rogue Specs
 	--Do you know Mutilate? Then you're an Assassination Rogue.
 	if IsSpellKnown(1329) == true then return 22 end
-	
-	
+	----
+	----
+	--Death Knight Specs
 	--Do you know Heart Strike? Then you're a Blood DK.
 	if IsSpellknown(000001) == true then return 1 end
+	----
+	----
+	--Warrior Specs
+	if IsSpellKnown(122940 == true then return 13 end
 end
 	
 
@@ -247,7 +250,7 @@ function combat(self)
 		["Warlock"] = { ["Destruction"] = warlock_destro, ["Demonology"] = warlock_demo, ["Affliction"] = warlock_affliction},
 		["Hunter"] = { ["Marksmanship"] = hunter_mm, ["Beast Mastery"] = hunter_bm },
 		["Mage"] = { ["Fire"] = mage_fire, ["Arcane"] = mage_arcane },
-		["Warrior"] = { ["Fury"] = warrior_fury, ["Protection"] = warrior_prot },
+		["Warrior"] = { ["Arms"] = warrior_arms, ["Fury"] = warrior_fury, ["Protection"] = warrior_prot },
 		["Priest"] = { ["Shadow"] = priest_shadow, ["Holy"] = priest_shadow },
 		["Rogue"] = { ["Assassination"] = rogue_assassination, ["Combat"] = rogue_combat, ["Subtlety"] = rogue_subtlety}
 	}
