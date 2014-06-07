@@ -5,3 +5,11 @@ Death Knight: Blood
 Rogue: Assassination
 
 Contact me about adding support for other classes and specs.
+
+
+In-game use the following commands:
+  /jps e = enable jps
+  /jps d = disable jps
+  /jps t = toggle jps on/off
+  /jps multi = toggle aoe/single target rotations
+  /jps pew = calls jps.combat() function (spam this to perform rotation with jps disabled)
